@@ -28,6 +28,7 @@ python3 ssap.py schedule.xlsx config.json
 6. 导出文件[result.ics](https://github.com/Asiimoviet/ScheduleReader/blob/master/result.ics)
 
 ### 课程表格式要求
+首先需要吧你们年级的课表移动到第一个sheet
 需要让第二和第四列充满时间，默认排版中第四列第九节课是没有时间的要自己调整
 每个cell里面课程的格式应该是"名字 - 教室"，名字中可以包含 - ，对于类似班会课那样的特殊格请自行调整。
 具体格式参考[schedule.xlsx](https://github.com/Asiimoviet/ScheduleReader/blob/master/schedule.xlsx)
