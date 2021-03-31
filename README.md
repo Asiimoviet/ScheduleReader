@@ -5,7 +5,7 @@
 在受够了手打了课程表以后写了这个程序，基本就是可以把老师发下来的课表转换成icalendar格式。目前各大主流平台基本都可以使用本格式
 ![](image.png)
 
-### 需要的第三方的库
+### 依赖库
 - Pandas
 - iCalendar
 如何安装：
@@ -15,7 +15,7 @@ pip3 install -r requirements.txt
 
 ### 如何使用
 1. 安装好Python 方法自行谷歌
-2. 安装好requirements
+2. 安装好依赖
 ```
 pip3 install -r requirements.txt
 ```
