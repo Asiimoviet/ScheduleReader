@@ -15,12 +15,10 @@ cal['X-WR-TIMEZONE'] = 'Asia/Shanghai'
 # 读取Excel课程表并导入到DataFrame中
 #path = input("Please Input the path of the excel schedule: ")
 excel = pd.read_excel(sys.argv[1])
-
-keywords = pd.read_json(sys.argv[2]).iloc[:,0]
+keywords = pd.read_json(sys.argv[2]).loc[:,'classes']
 
 # 处理周一的日期
-#monday = datetime.date.fromisoformat(input("Please input the date of Monday (format: yyyy-MM-dd): "))
-monday = datetime.date(2021, 3, 29)
+monday = datetime.date.fromisoformat(pd.read_json(sys.argv[2]).loc[:,'monday'][0])
 rowIndex = excel.iloc[:, 0].dropna().index
 
 # 提取课程
