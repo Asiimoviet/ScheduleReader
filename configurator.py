@@ -7,6 +7,8 @@ config = {
     'selected': []
 }
 
+freePeriods = []
+
 classes = ['ACT 1', 'ACT 2', 'ACT 3', 'SAT', 'TOEFL 2', 'TOEFL 4']
 
 print('======================================================')
@@ -42,6 +44,16 @@ def swipeRow(row: int):
             if found: break
 
         if found: continue
+        if len(periods) == 0: continue
+
+        isFree = False
+        
+        for free in freePeriods:
+            if periods.reset_index(drop=1).equals(free.reset_index(drop=1)):
+                isFree = True
+                break
+        
+        if isFree: continue
 
         print('\nSelected the subject you have chosen: ')
         print('0: I don\'t have a class at this period')
@@ -49,7 +61,10 @@ def swipeRow(row: int):
             print('{}: {}'.format(index + 1, periods.iloc[index]))
         choice = int(input('Please input your choice: '))
 
-        if choice == 0: continue
+        if choice == 0: 
+            freePeriods.append(periods)
+            continue 
+
         config['selected'].append(periods.iloc[choice - 1])
         
     
