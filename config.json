@@ -1,11 +1,1 @@
-{
-    "monday": "2021-03-29",
-    "classes": [
-        "ACT 1",
-        "AP Computer Science Class 1",
-        "AP Physics C: M  Class 2",
-        "American Literature Class 1",
-        "US History Class 1",
-        "BC  Class 2"
-    ]
-}
+{"class": "ACT 1", "selected": ["American Literature Class 1 - Kate - S302", "AP Physics C: M  Class 2 - Roger - S303", "\u5347\u5b66\u6307\u5bfc - S303", "AP Computer Science Class 1 - Mr. Li Yutong - S303", "AP Calculus BC  Class 2 - Robi - S202", "US History Class 1 - Megan - S502"]}
