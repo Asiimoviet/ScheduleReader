@@ -14,7 +14,7 @@ cal['X-WR-TIMEZONE'] = 'Asia/Shanghai'
 
 # 读取Excel课程表并导入到DataFrame中
 #path = input("Please Input the path of the excel schedule: ")
-excel = pd.read_excel(sys.argv[1])
+excel = pd.read_excel(sys.argv[1], engine='openpyxl')
 className = pd.read_json('config.json').loc[:, 'class'].iloc[0]
 keywords = pd.read_json('config.json').loc[:,'selected']
 
@@ -34,7 +34,10 @@ def extractClass(timeCol: int, col: int, dayOffset: int):
         rowEnd = rowIndex[periodCount + 1]
         print('Reading from Row {} to {}'.format(rowStart, rowEnd))
 
-        timeRaw = excel.iloc[rowStart, timeCol]
+        if excel.iloc[rowStart, timeCol] == '': 
+            timeRaw = excel.iloc[rowStart, timeCol]
+        else:
+            timeRaw = excel.iloc[rowStart, 1]
         timeStart = datetime.datetime(baseDate.year, baseDate.month, baseDate.day, int(timeRaw[:timeRaw.find(':')]), int(timeRaw[timeRaw.find(':') + 1:timeRaw.find('-')]))
         timeEnd = datetime.datetime(baseDate.year, baseDate.month, baseDate.day, int(timeRaw[timeRaw.find('-') + 1:timeRaw.rfind(':')]), int(timeRaw[timeRaw.rfind(':')+1:]))
         print('Time: {}'.format(timeRaw))

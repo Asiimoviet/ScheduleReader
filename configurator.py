@@ -23,7 +23,7 @@ print('Selected Class: {}'.format(classes[choice - 1]))
 config['class'] = classes[choice - 1]
 
 print('Loading Schedule')
-excel = pd.read_excel(sys.argv[1])
+excel = pd.read_excel(sys.argv[1], engine='openpyxl')
 
 def swipeRow(row: int):
     rowList = excel.iloc[:, 0].dropna().index
