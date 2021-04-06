@@ -7,7 +7,7 @@ config = {
     'selected': []
 }
 
-freePeriods = []
+skips = []
 
 classes = ['ACT 1', 'ACT 2', 'ACT 3', 'SAT', 'TOEFL 2', 'TOEFL 4']
 
@@ -29,32 +29,33 @@ def swipeRow(row: int):
     rowList = excel.iloc[:, 0].dropna().index
     for classNum in range(9):
         rowStart = rowList[classNum]
-        rowEnd = rowList[classNum + 1] - 1
-        periods = excel.iloc[rowStart:rowEnd, row].dropna()
-        found = False
+        rowEnd = rowList[classNum + 1]
+        periods = excel.iloc[rowStart:rowEnd, row].dropna().reset_index(drop=1)
+
+        dropIndex = []
+        for index in range(len(periods)):
+            if periods.iloc[index] == '/':
+                dropIndex.append(index)
+        periods = periods.drop(labels=dropIndex).reset_index(drop=1)
+
+        skipping = len(periods) == 0
+        for skip in skips:
+            if periods.reset_index(drop=1).equals(skip.reset_index(drop=1)):
+                skipping = True
+        if skipping: continue
+
         for period in periods:
-            if period == '/': continue
-            if period.find(config['class']) != -1: 
-                found = True
+            if period.find(config['class']) != -1:
+                skipping = True
                 break
-            for selected in config['selected']:
-                if period.find(selected) != -1:
-                    found = True
-                    break
-            if found: break
-
-        if found: continue
-        if len(periods) == 0: continue
-
-        isFree = False
+            else:
+                for selected in config['selected']:
+                    if period.find(selected) != -1:
+                        skipping = True
+                        break
+                if skipping: break
+        if skipping: continue
         
-        for free in freePeriods:
-            if periods.reset_index(drop=1).equals(free.reset_index(drop=1)):
-                isFree = True
-                break
-        
-        if isFree: continue
-
         print('\nSelected the subject you have chosen: ')
         print('0: I don\'t have a class at this period')
         for index in range(len(periods)):
@@ -62,10 +63,11 @@ def swipeRow(row: int):
         choice = int(input('Please input your choice: '))
 
         if choice == 0: 
-            freePeriods.append(periods)
+            skips.append(periods.reset_index(drop=1))
             continue 
 
         config['selected'].append(periods.iloc[choice - 1])
+        skips.append(periods.reset_index(drop=1))
         
     
 swipeRow(2)
