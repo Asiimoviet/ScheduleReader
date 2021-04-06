@@ -34,10 +34,10 @@ def extractClass(timeCol: int, col: int, dayOffset: int):
         rowEnd = rowIndex[periodCount + 1]
         print('Reading from Row {} to {}'.format(rowStart, rowEnd))
 
-        if excel.iloc[rowStart, timeCol] == '': 
-            timeRaw = excel.iloc[rowStart, timeCol]
-        else:
+        if excel.isna().iloc[rowStart, timeCol]: 
             timeRaw = excel.iloc[rowStart, 1]
+        else:
+            timeRaw = excel.iloc[rowStart, timeCol]
         timeStart = datetime.datetime(baseDate.year, baseDate.month, baseDate.day, int(timeRaw[:timeRaw.find(':')]), int(timeRaw[timeRaw.find(':') + 1:timeRaw.find('-')]))
         timeEnd = datetime.datetime(baseDate.year, baseDate.month, baseDate.day, int(timeRaw[timeRaw.find('-') + 1:timeRaw.rfind(':')]), int(timeRaw[timeRaw.rfind(':')+1:]))
         print('Time: {}'.format(timeRaw))
