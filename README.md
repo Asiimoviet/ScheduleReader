@@ -1,5 +1,7 @@
 # ScheduleReader
 
+注意⚠️：本项目不再维护，请移步[2.0](https://github.com/Asiimoviet/ScheduleReader2.0)版本！！！
+
 | 本项目只是个人使用，基本不会有维护和更新，不符合格式的可以fork一份自己随便改改就能用了（虽然会改的应该也能自己写）
 
 在受够了手打了课程表以后写了这个程序，基本就是可以把老师发下来的课表转换成icalendar格式。目前各大主流平台基本都可以使用本格式
@@ -8,6 +10,7 @@
 ### 依赖库
 - Pandas
 - iCalendar
+
 如何安装：
 ```
 pip3 install -r requirements.txt
